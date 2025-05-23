@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice Game</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            font-family: "Lobster", cursive;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: #4ecca3;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: auto;
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .dice-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            justify-items: center;
+            margin-top: 20px;
+        }
+
+        .dice {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .dice:hover {
+            transform: scale(1.1);
+        }
+
+        img {
+            width: 100%;
+            max-width: 120px;
+            margin-top: 10px;
+            border-radius: 10px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        p {
+            font-size: 1.5rem;
+            margin: 0;
+            color: #ffffff;
+            font-family: "Indie Flower", cursive;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+        }
+
+        .bottom {
+            margin-top: 30px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #4ecca3, #2a5298);
+            font-family: "Indie Flower", cursive;
+            border-radius: 50px;
+            color: #ffffff;
+            font-size: 1.5rem;
+            padding: 15px 30px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(135deg, #2a5298, #4ecca3);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .dice-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            h1 {
+                font-size: 3rem;
+            }
+
+            .btn {
+                font-size: 1.2rem;
+                padding: 12px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dice Game</h1>
+
+        <div class="dice-container">
+            <div class="dice">
+                <p class="Player1">Player 1</p>
+                <img src="dice1.png" alt="dice 1" class="img1">
+            </div>
+            <div class="dice">
+                <p class="Player2">Player 2</p>
+                <img src="dice1.png" alt="dice 2" class="img2">
+            </div>
+            <div class="dice">
+                <p class="Player3">Player 3</p>
+                <img src="dice1.png" alt="dice 3" class="img3">
+            </div>
+            <div class="dice">
+                <p class="Player4">Player 4</p>
+                <img src="dice1.png" alt="dice 4" class="img4">
+            </div>
+        </div>
+
+        <div class="bottom">
+            <button type="button" class="btn" onclick="rollTheDice()">Roll The Dice</button>
+        </div>
+    </div>
+    
+    <script>
+        
+        const player1 = "Player 1";
+        const player2 = "Player 2";
+        const player3 = "Player 3";
+        const player4 = "Player 4";
+
+        function rollTheDice() {
+            const dice1 = document.querySelector(".img1");
+            const dice2 = document.querySelector(".img2");
+            const dice3 = document.querySelector(".img3");
+            const dice4 = document.querySelector(".img4");
+            const rollButton = document.querySelector(".btn");
+            const result = document.querySelector("h1");
+
+            // Disable button during animation
+            rollButton.disabled = true;
+
+            // Show rolling GIF for all dice
+            dice1.setAttribute("src", "dice.gif");
+            dice2.setAttribute("src", "dice.gif");
+            dice3.setAttribute("src", "dice.gif");
+            dice4.setAttribute("src", "dice.gif");
+            result.innerHTML = ""; // Clear result text
+
+            setTimeout(() => {
+                const randomNumber1 = Math.floor(Math.random() * 6) + 1;
+                const randomNumber2 = Math.floor(Math.random() * 6) + 1;
+                const randomNumber3 = Math.floor(Math.random() * 6) + 1;
+                const randomNumber4 = Math.floor(Math.random() * 6) + 1;
+
+                // Update dice images and alt text
+                dice1.setAttribute("src", `dice${randomNumber1}.png`);
+                dice1.setAttribute("alt", `dice ${randomNumber1}`);
+                dice2.setAttribute("src", `dice${randomNumber2}.png`);
+                dice2.setAttribute("alt", `dice ${randomNumber2}`);
+                dice3.setAttribute("src", `dice${randomNumber3}.png`);
+                dice3.setAttribute("alt", `dice ${randomNumber3}`);
+                dice4.setAttribute("src", `dice${randomNumber4}.png`);
+                dice4.setAttribute("alt", `dice ${randomNumber4}`);
+
+                // Determine the winner
+                const scores = [
+                    { name: player1, score: randomNumber1 },
+                    { name: player2, score: randomNumber2 },
+                    { name: player3, score: randomNumber3 },
+                    { name: player4, score: randomNumber4 }
+                ];
+
+                // Sort scores in descending order
+                scores.sort((a, b) => b.score - a.score);
+
+                if (scores[0].score === scores[1].score) {
+                    result.innerHTML = "It's a Draw!";
+                } else {
+                    result.innerHTML = `${scores[0].name} WINS!`;
+                }
+
+                // Re-enable button after animation
+                rollButton.disabled = false;
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
